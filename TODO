@@ -1,0 +1,33 @@
+Just a list of tasks to do without order
+
+* Porting to 64 bit platforms
+kkk
+
+* Image masking
+Pass a mask image created elsewhere (pre-processing) and evaluate the classifier
+only on some places.
+    
+* Non-maxima suppression
+Grouping of results to remove multiple detection. Maybe make function like:
+int group_detections(results, n, threshold);
+
+* Return largest object (stop at first detection on smallest scale)
+In some applications only a largest object is searched for and it can save
+many computations to search only on small scales of pyramid.
+
+* Window prunning (through masking)
+Use a mask created by edge detector which rules out flat areas.
+
+* Multicore support (OMP?)
+When available, more cores can be used. The speed-up is nearly linear.
+
+* Neighborhood suppression
+A simple extension which can rule out image positions which are not likely to
+contain a target object. This extection is based on machine learning which
+re-uses calulated features to predict response on neighboring positions.
+** Update classifier structure to hold suppression alphas
+** image scanner which can update mask from results of weak hypothesis
+** WH that supports suppression alphas
+
+* ARM Neon support?
+

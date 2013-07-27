@@ -15,4 +15,3 @@ Library for face recognition using Waldboost algorithm
 * git clone https://github.com/korczis/libfr.git
 * cd libfr/build
 * ./build.sh
-* 

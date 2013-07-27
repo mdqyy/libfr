@@ -6,12 +6,12 @@ Library for face recognition using Waldboost algorithm
 
 *  build-essential 
 *  module-assistant
-*  git
+*  git-all
 
 
 ## Build
 
-* apt-get install build-essential module-assistant
+* apt-get install build-essential module-assistant git-all
 * git clone https://github.com/korczis/libfr.git
 * cd libfr/build
 * ./build.sh

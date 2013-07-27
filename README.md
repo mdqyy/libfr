@@ -4,17 +4,18 @@ Library for face recognition using Waldboost algorithm
 
 ## Prerequisites (debian packages)
 
-*  build-essential 
-*  module-assistant
-*  git-core
-*  cmake
-
+* build-essential 
+* module-assistant
+* git-core
+* cmake
+* libopencv-dev
+* 
 ## Build
 
 * Install required packages
 
 ```
-apt-get install build-essential module-assistant git-core cmake
+apt-get install build-essential module-assistant git-core cmake libopencv-dev
 ```
 
 * Clone repository

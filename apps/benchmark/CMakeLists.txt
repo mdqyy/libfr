@@ -24,8 +24,7 @@ pkg_check_modules(OPENCV opencv2)
 include_directories(${OPENCV_INCLUDE_DIRS})
 link_directories(${OPENCV_LIBRARIES})
 
-
-target_link_libraries(benchmark ${OPENCV_LIBS})
+target_link_libraries(benchmark ${OPENCV_LIBS} argtable2)
 
 # libfr itself dependency
 target_link_libraries(benchmark libfr)

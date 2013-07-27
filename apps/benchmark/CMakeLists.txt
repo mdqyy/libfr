@@ -7,9 +7,6 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -std=c99 -msse3 -mfpmath=both -O3 -fop
 # CXX Flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -msse3 -mfpmath=both -O3 -fopenmp -ffast-math -fomit-frame-pointer -finline-functions -D NDEBUG")
 
-# Linker flags
-SET(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -lopencv2")
-
 find_package(PkgConfig)
 
 include_directories(${CMAKE_SOURCE_DIR}/lib/include)
@@ -22,7 +19,7 @@ find_package(PkgConfig)
 # OpenCV dependency
 pkg_check_modules(OPENCV opencv)
 include_directories(${OPENCV_INCLUDE_DIRS})
-link_directories(${OPENCV_LIBRARIES})
+# link_directories(${OPENCV_LIBRARIES})
 
 target_link_libraries(benchmark ${OPENCV_LIBS} argtable2)
 

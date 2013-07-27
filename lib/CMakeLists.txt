@@ -31,12 +31,12 @@ find_package(PkgConfig)
 # See http://stackoverflow.com/questions/7417242/linking-problem-with-opencv-and-cmake
 pkg_check_modules(OPENCV opencv)
 include_directories(${OPENCV_INCLUDE_DIRS})
-link_directories(${OPENCV_LIBRARIES})
+# link_directories(${OPENCV_LIBRARIES})
 set(OPENCV_LIBS opencv_core opencv_imgproc opencv_calib3d opencv_video opencv_features2d opencv_ml opencv_highgui opencv_objdetect opencv_contrib opencv_legacy opencv_gpu)
 target_link_libraries(libfr ${OPENCV_LIBS})
 
 # LibXml2 dependency
 pkg_check_modules(LIBXML2 libxml-2.0)
 include_directories(${LIBXML2_INCLUDE_DIRS})
-link_directories(${LIBXML2_LIBRARIES})
+# link_directories(${LIBXML2_LIBRARIES})
 target_link_libraries(libfr ${LIBXML2_LIBRARIES})

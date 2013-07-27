@@ -235,7 +235,7 @@ static int eval_classifier_lbp_bunch16(PreprocessedImage * PI, TClassifier * c, 
     int bunch_begin = begin;
     for (s = c->stage+begin; s < c->stage+end; s += 16, bunch_begin += 16)
     {
-        int valid_stages = min(c->stage_count - (s - c->stage), 16u);
+        int valid_stages = std::min<unsigned long>(c->stage_count - (s - c->stage), 16u);
         // Load data
         int128 feature_data[9];
 
@@ -315,7 +315,7 @@ static int eval_classifier_lrd_bunch16(PreprocessedImage * PI, TClassifier * c, 
     int bunch_begin = begin;
     for (s = c->stage+begin; s < c->stage+end; s += 16, bunch_begin += 16)
     {
-        int valid_stages = min(c->stage_count - (s - c->stage), 16u);
+        int valid_stages = std::min<unsigned long>(c->stage_count - (s - c->stage), 16u);
         // Load data
         int128 feature_data[9], A, B;
 
@@ -386,7 +386,7 @@ static int eval_classifier_lrp_bunch16(PreprocessedImage * PI, TClassifier * c, 
     int bunch_begin = begin;
     for (s = c->stage+begin; s < c->stage+end; s += 16, bunch_begin += 16)
     {
-        int valid_stages = min(c->stage_count - (s - c->stage), 16u);
+        int valid_stages = std::min<unsigned long>(c->stage_count - (s - c->stage), 16u);
         // Load data
         int128 feature_data[9], A, B;
 

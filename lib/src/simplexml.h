@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <stack> 
-#include <libxml/tree.h>
+#include <libxml2/libxml/tree.h>
 
 extern xmlNodePtr getNode( std::string nodeName, xmlNodePtr);
 

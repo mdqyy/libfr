@@ -355,7 +355,7 @@ void insert_image(IplImage * img, PreprocessedPyramid * PP, int options)
     options |= PP_COPY;
     preprocess_image(img, PP->PI[0], options);
     
-    int max_level = min(unsigned(PP->octaves * PP->levels_per_octave), PP->PI.size());
+    int max_level = std::min<int>(unsigned(PP->octaves * PP->levels_per_octave), PP->PI.size());
 
     for (int octave_base = 0; octave_base < max_level; octave_base += PP->levels_per_octave)
     {

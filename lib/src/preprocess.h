@@ -17,7 +17,7 @@
 #ifndef _PREPROCESS_H_
 #define _PREPROCESS_H_
 
-#include <cxcore.h>
+#include <opencv/cxcore.h>
 
 // Elementary operations available in preprocessing
 #define PP_COPY     0x01    ///< Copy or resize image

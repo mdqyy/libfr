@@ -12,7 +12,7 @@ include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/include/abr")
 
 # Project specific sources
-add_library(libfr 
+set(LIB_SOURCES 
   src/classifier.cpp 
   src/const.cpp 
   src/core.cpp 
@@ -22,6 +22,8 @@ add_library(libfr
   src/preprocess.cpp
   src/simplexml.cpp
 )
+
+add_library(libfr ${LIB_SOURCES})
 
 # Package finder
 find_package(PkgConfig)

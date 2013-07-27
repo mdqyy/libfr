@@ -9,9 +9,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -msse3 -mfpmath=both -O3 -fopenmp 
 
 find_package(PkgConfig)
 
+# Add library includes
 include_directories(${CMAKE_SOURCE_DIR}/lib/include)
-add_executable(benchmark benchmark.cpp)
 
+set(APP_SOURCES
+  benchmark.cpp
+)
+
+add_executable(benchmark ${APP_SOURCES})
 
 # Package finder
 find_package(PkgConfig)
@@ -20,6 +25,12 @@ find_package(PkgConfig)
 pkg_check_modules(OPENCV opencv)
 include_directories(${OPENCV_INCLUDE_DIRS})
 # link_directories(${OPENCV_LIBRARIES})
+
+# argtables2 dependency
+pkg_check_modules(ARGTABLE argtable2)
+include_directories(${ARGTABLE_INCLUDE_DIRS})
+# link_directories(${ARGTABLE_LIBRARIES})
+target_link_libraries(benchmark ${ARGTABLE_LIBRARIES})
 
 target_link_libraries(benchmark ${OPENCV_LIBS} argtable2)
 

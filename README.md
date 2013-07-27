@@ -6,7 +6,7 @@ Library for face recognition using Waldboost algorithm
 
 * http://medusa.fit.vutbr.cz/libabr/
 * http://medusa.fit.vutbr.cz/public/software/waldboost/
-* 
+
 ## Prerequisites (debian packages)
 
 * build-essential 

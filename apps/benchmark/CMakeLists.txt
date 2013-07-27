@@ -20,7 +20,7 @@ add_executable(benchmark benchmark.cpp)
 find_package(PkgConfig)
 
 # OpenCV dependency
-pkg_check_modules(OPENCV opencv2)
+pkg_check_modules(OPENCV opencv)
 include_directories(${OPENCV_INCLUDE_DIRS})
 link_directories(${OPENCV_LIBRARIES})
 

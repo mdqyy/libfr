@@ -27,7 +27,9 @@ add_library(libfr
 find_package(PkgConfig)
 
 # OpenCV dependency
-pkg_check_modules(OPENCV libopencv)
+# See http://opencv.willowgarage.com/wiki/CompileOpenCVUsingLinux
+# See http://stackoverflow.com/questions/7417242/linking-problem-with-opencv-and-cmake
+pkg_check_modules(OPENCV opencv)
 include_directories(${OPENCV_INCLUDE_DIRS})
 link_directories(${OPENCV_LIBRARIES})
 set(OPENCV_LIBS opencv_core opencv_imgproc opencv_calib3d opencv_video opencv_features2d opencv_ml opencv_highgui opencv_objdetect opencv_contrib opencv_legacy opencv_gpu)

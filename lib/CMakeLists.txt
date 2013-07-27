@@ -40,3 +40,8 @@ target_link_libraries(libfr ${OPENCV_LIBS})
 pkg_check_modules(LIBXML2 libxml-2.0)
 include_directories(${LIBXML2_INCLUDE_DIRS})
 target_link_libraries(libfr ${LIBXML2_LIBRARIES})
+
+# FFmpeg dependency
+pkg_check_modules(FFMPEG ffmpeg)
+include_directories(${FFMPEG_INCLUDE_DIRS})
+target_link_libraries(libfr ${FFMPEG_LIBRARIES})

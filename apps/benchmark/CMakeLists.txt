@@ -28,11 +28,10 @@ include_directories(${OPENCV_INCLUDE_DIRS})
 
 # argtables2 dependency
 pkg_check_modules(ARGTABLE argtable2)
+set(ARGTABLE_LIBS argtable2)
 include_directories(${ARGTABLE_INCLUDE_DIRS})
 # link_directories(${ARGTABLE_LIBRARIES})
 target_link_libraries(benchmark ${ARGTABLE_LIBRARIES})
-
-target_link_libraries(benchmark ${OPENCV_LIBS} argtable2)
 
 # libfr itself dependency
 target_link_libraries(benchmark libfr)

@@ -14,7 +14,7 @@ Library for face recognition using Waldboost algorithm
 * Install required packages
 
 ```
-apt-get install build-essential module-assistant git-core
+apt-get install build-essential module-assistant git-core cmake
 ```
 
 * Clone repository

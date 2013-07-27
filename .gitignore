@@ -18,3 +18,4 @@ build/CMakeFiles/
 nuild/Makefile
 build/cmake_install.cmake
 build/apps/
+build/lib/

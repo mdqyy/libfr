@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
 project(benchmark)
 
+# C Flags
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -std=c99 -msse3 -mfpmath=both -O3 -fopenmp -ffast-math -fomit-frame-pointer -finline-functions -D NDEBUG")
+
+# CXX Flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -msse3 -mfpmath=both -O3 -fopenmp -ffast-math -fomit-frame-pointer -finline-functions -D NDEBUG")
+
+# Linker flags
+SET(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -lopencv2")
+
 find_package(PkgConfig)
 
 include_directories(${CMAKE_SOURCE_DIR}/lib/include)

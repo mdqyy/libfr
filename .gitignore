@@ -11,3 +11,10 @@
 *.lai
 *.la
 *.a
+
+build/cmake_install.cmake
+build/CMakeCache.txt
+build/Makefile
+build/CMakeFiles/
+build/apps/
+build/lib/

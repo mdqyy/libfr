@@ -1,0 +1,147 @@
+
+    libabr
+    Simple object detection library
+
+    Department of Computer Graphics and Multimedia
+    Faculty of Information Technology
+    Brno University of Technology
+
+    Roman Juranek <ijuranek@fit.vutbr.cz>
+
+
+INTRODUCTION
+
+The libabr is simple low-level library for high performance object detection
+with WaldBoost based classifiers. The key features are following.
+
+* Compact representation of classifiers in the form of C source code (suitable
+  for embedded systems) or XML file
+* Evaluation of classifier on the given position in image
+* Scanning the image with classifier
+* SSE implementation of feature extraction (LRD, LRP, LBP)
+* Multiscale image scan through repeated application of classifier to scaled image
+
+The features not solved by the library are grouping of detections, rotation
+invariant object detection and object tracking. Such applications can be build
+on the top of libabr.
+
+Compared to OpenCV which is often used for object detection, the library offers
+faster classifiers using optimal decision strategy learned by WaldBoost
+algorithm, simpler image features (LRD, LRP, LBP) and optimized implementations
+of classifier evaluation for Intel SSE. Moreover, the library offers to use
+static classifiers in the form of C source code which is more friendly to
+enbedded systems than XML based classifiers.
+
+
+PUBLICATIONS
+
+The implemented algorithms are described in publications.
+
+Herout Adam, Juránek Roman, Zemčík Pavel: Implementing the Local Binary
+Patterns with SIMD Instructions of CPU, In: Proceedings of WSCG 2010, Plzeň,
+CZ, ZČU v Plzni, 2010, p. 39-42, ISBN 978-80-86943-86-2
+
+Herout Adam, Zemčík Pavel, Hradiš Michal, Juránek Roman, Havel Jiří, Jošth
+Radovan, Žádník Martin: Pattern Recognition, Recent Advances, Pattern
+Recognition, Recent Advances, Vienna, AT, IN-TECH, 2010, p. 111-136, ISBN
+978-953-7619-90-9
+
+Herout Adam, Zemčík Pavel, Juránek Roman, Hradiš Michal: Implementation of the
+"Local Rank Differences" Image Feature Using SIMD Instructions of CPU, In:
+Proceedings of Sixth Indian Conference on Computer Vision, Graphics and Image
+Processing, Bhubaneswar, IN, IEEE CS, 2008, p. 9, ISBN 978-0-7695-3476-3
+
+Hradiš Michal, Herout Adam, Zemčík Pavel: Local Rank Patterns - Novel Features
+for Rapid Object Detection, In: Proceedings of International Conference on
+Computer Vision and Graphics 2008, Heidelberg, DE, Springer, 2008, p. 1-12,
+ISSN 0302-9743
+
+
+DOWNLOAD
+
+Latest package can be downloaded from
+    http://medusa.fit.vutbr.cz/libabr
+
+
+REQUIREMENTS
+
+The library requires some packages to be installed on the target system.
+
+* OpenCV (only for image representation and some preprocessing
+  stuff /cvFilter2D/, so version 2.0+ would be ok)
+* libxml-2 (XML parsing)
+
+INSTALLATION
+
+The library is compiled by the commmand:
+
+# make lib
+
+and the resulting file libabr.so is placed in ./lib directory. To use the
+library you need to set LD_LIBRARY_PATH to ./lib.
+
+Make with -D TARGET=DEBUG for compile the debug version of the library
+
+There is no installation target in the Makefile so when one wants the library
+integrated in the system, he must copy the files himself to propper places.
+
+
+USAGE
+
+The interface to the library is in ./include directory (libabr.h). When using
+the libabr, you only need to include abr.h, set include path to the ./include
+and library path to ./lib, and link against abr (-labr).
+
+
+Example
+
+test.cpp
+---
+#include <libabr.h>
+int main() {
+    init_preprocess();
+    TClassifier * c = load_classifier_XML(/*filename*/);
+    // ...
+    return 0;
+}
+---
+
+# g++ test.cpp -o test -I./include -L./lib `pkg-config --libs --cflags opencv libxml-2.0` -labr
+
+
+EXAMPLES
+
+Example programs that make use of libabr are located in ./examples directory
+and they can be compiled by running make in that directory. The libabr must be
+compiled beforhand.
+
+process_image
+
+This example shows how and image can be scanned by a classifier. Only single
+scale processing is used. Engine used is selected by command line argument and
+the image is preprocessed, scanned and results are printed to stdout. The
+preprocessing and scanning is repeated several times for time measurement
+purposes.
+
+xml2h
+
+Conversion of a classifier to .c/.h source code. Converted classifiers can be
+included and compiled to other programs. This is suitable for creating build-in
+classifiers and for embedded systems with no XML processing capability.
+
+stats
+
+
+KNOWN BUGS
+
+Few things do not still work well or might cause crash.
+
+* Detect_objects() still causes crash when using optimized image scanners.
+  It works well with scan_image_intensity and scan_image_integral.
+
+* Responses are not equal for different implementation. But they differ only
+  slightly and the detection is reliable in all implementations.
+
+* Some implementations are not stable under certain conditions and may cause
+  crashes.
+

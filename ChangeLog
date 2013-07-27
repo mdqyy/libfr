@@ -1,0 +1,77 @@
+2011-10-12  Roman Juranek  <ijuranek@fit.vutbr.cz>
+	* ALL: Initial version. Code migrated from ABon project and cleaned up.
+	All implemented detectors were debuged to produce correct results.
+	Supported features are LBP, LRP and LRD.
+
+	* preprocess.cpp: Preprocessing module that unifies access to image data. 
+
+	* core.cpp: Core module with high-level fucnctions and structures.
+
+	* core.cpp: Functions set_classifier_image_size and
+	calculate_classifier_ranks merged to prepare_classifier. This is more
+	convenient for programmer.
+
+	* core_simple.cpp: Evaluation of classifier on an intensity or integral
+	image for reference purposes.
+
+	* core_simple.cpp: Added functions that test if a classifier can be
+	evaluated by the intensity and integral scanners.
+
+	* core_sse.cpp: Different versions of detector that uses SSE instructions.
+
+	* core_sse.cpp: Added functions that test if a classifier can be
+	evaluated by the lbp, conv_bunch16 and iconv scanners.
+
+	* core_sse.cpp, core_simple.cpp: Value of evaluated stages is _incremented_
+	by classification evaluation function. This allows for combining various
+	evaluators.
+
+	* lbp.c: Local Binary Patterns operator implemented with SSE.
+
+	* const.cpp: Constants needed for feature evaluation.
+
+	* classifier.cpp: Classifier management - XML processing, expoert to .c
+	source, etc.
+
+
+2011-10-13  Roman Juranek  <ijuranek@fit.vutbr.cz>
+	* preprocess.cpp: Added PreprocessedPyramid as a support for multi-scale
+	object detection.
+
+	* preprocess.cpp: Fixed bug which caused crash during preprocessing -
+	inconsistent image sizes of src and dst in convolution.
+
+
+2011-10-18 Roman Juranek <ijuranek@fit.vutbr.cz>
+
+	* preprocess.cpp (interlieved_convolution): Fixed crash
+
+
+2011-10-27 Roman Juranek <ijuranek@fit.vutbr.cz>
+
+	* README: Updated with required informations
+
+	* THANKS: Created
+
+
+2011-10-28 Roman Juranek <ijuranek@fit.vutbr.cz>
+
+	* ./examples: Directory with examples
+
+	* ./benchmark: Benchmark application to compare the lib with OpnCV
+
+	* ./data: Added example classifier for frontal face detection (LBP2x2
+	  features, alpha=0.2)
+
+	* structures.h: Converted to C (with typedefs) to allow pure .c static
+	  classifiers
+
+	* classifier.cpp (export_classifier_header): Updated to produce correct
+	  headers with current version of library.
+
+	* preprocess.cpp (create_pyramid): Added restriction to minimal size of
+	  an image.
+	
+	* preprocess.cpp (insert_image): Fixed bug which caused segfault in cases
+	  when the pyramid had less images when defined by octaves and
+	  levels_per_octave.

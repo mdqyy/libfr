@@ -1,0 +1,62 @@
+
+    Object detection with WaldBoost
+    Roman Juranek <ijuranek@fit.vutbr.cz>
+    FIT BUT, Brno
+
+Description
+-----------
+
+Simple object detection engine based on WaldBoost machine learning algorithm.
+The engine can use Local Binary Patterns, Local Rank Patterns, Local Rank
+Differences or Haar image features.
+
+Files
+-----
+
+src/
+
+classifier.cpp/h    Support for XML classifiers
+demo.cpp            Main program
+faces.h             Classifier for face detection tranformed to header file
+image.c/h           Support stuff
+lrd_engine.c/h      Critical part of the detection - implementation of feature extraction and 
+simplexml.cpp/h     Some XML support
+
+data/               Example classifiers (for face detection and car detection)
+
+
+Requirements
+------------
+
+OpenCV              Input from camera and image representation
+libxml2             XML support
+libargtable2        Command line parsing
+
+
+Examples
+--------
+
+demo
+
+The program captures image from camera and detects objects in the image.
+Implicit classifier is for face detection (faces.h is used). User can supply
+other classifier on command line (e.g. those in the data/ directory).
+
+
+wbdetect
+
+This program detect objects with given classifier in images supplied as
+parameters. For more info see:
+
+    wbdetect --help
+
+
+Critical parts of the computation
+---------------------------------
+
+Functions in lrd_engine.cpp
+
+eval*StageSimple()      Extraction of feature from the image
+eval*Classifier()       Evaluation of the classifier
+scanImage()             Sliding window scanning on input image
+

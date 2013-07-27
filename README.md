@@ -10,13 +10,14 @@ Library for face recognition using Waldboost algorithm
 * cmake
 * libopencv-dev
 * libxml2-dev
+* libargtable2-dev
 
 ## Build
 
 * Install required packages
 
 ```
-apt-get install build-essential module-assistant git-core cmake libopencv-dev libxml2-dev
+apt-get install build-essential module-assistant git-core cmake libopencv-dev libxml2-dev libargtable2-dev
 ```
 
 * Clone repository

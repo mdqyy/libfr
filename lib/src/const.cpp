@@ -44,6 +44,7 @@
 // 4b - sample posType << 4
 // 4b - feature posType
 
+// FIXME: Add more comprehensive documentation
 const unsigned char  block_table[1024] =
 {
     // type 0 (1x1) table - all blocks are 0
@@ -133,6 +134,7 @@ const unsigned char  block_table[1024] =
 
 
 // mask index for different positions of feature and sample
+// FIXME: Add more comprehensive documentation
 const unsigned char mask_table[1024] =
 {
     // 0,0 shift
@@ -223,6 +225,7 @@ const unsigned char mask_table[1024] =
 
 
 /// Tables of rank indexes for different alignment of LRD grid.
+// FIXME: Add more comprehensive documentation
 const int rank_table[4][9] =
 {
     {0, 1, 4, 2, 3, 6, 8, 9, 12}, // 0,0 (x,y)
@@ -233,6 +236,7 @@ const int rank_table[4][9] =
 
 
 // LRD masks for different feature alignment
+// FIXME: Add more comprehensive documentation
 const int128 masks[4] = 
 {
     { {
@@ -261,6 +265,7 @@ const int128 masks[4] =
     } },
 };
 
+// FIXME: Add more comprehensive documentation
 const int128 lbp_weights[4] = 
 {
     { {
@@ -289,7 +294,7 @@ const int128 lbp_weights[4] =
     } },
 };
 
-
+// FIXME: Add more comprehensive documentation
 const int128 ones = {{
     0x01,0x01,0x01,0x01,
     0x01,0x01,0x01,0x01,
@@ -297,6 +302,7 @@ const int128 ones = {{
     0x01,0x01,0x01,0x01,
 }};
 
+// FIXME: Add more comprehensive documentation
 const int128 sign_bit = {{
     0x80,0x80,0x80,0x80,
     0x80,0x80,0x80,0x80,
@@ -304,6 +310,7 @@ const int128 sign_bit = {{
     0x80,0x80,0x80,0x80,
 }};
 
+// FIXME: Add more comprehensive documentation
 const int128 lbp_valid_mask = {{
     0x00,0xFF,0xFF,0xFF,
     0xFF,0xFF,0xFF,0xFF,
@@ -311,5 +318,6 @@ const int128 lbp_valid_mask = {{
     0xFF,0xFF,0xFF,0xFF
 }};
 
+// FIXME: Add more comprehensive documentation
 const int lbp_bit_order[8] = {0, 1, 2, 5, 8, 7, 6, 3};
 

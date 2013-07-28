@@ -37,9 +37,9 @@ static inline int __attribute__((const,always_inline)) get_mod_position(int x, i
 static inline float eval_lbp_stage_precalc(PreprocessedImage * PI, TStage * s, int x, int y, int mod_pos, int * feature)
 {
     // Select source image
-    IplImage * image = &(PI->lbp[(int)s->sz_type]);
+    IplImage* const image = &(PI->lbp[(int)s->sz_type]);
 
-    int table_idx = (s->sz_type << 8) | mod_pos | s->pos_type;
+    const int table_idx = (s->sz_type << 8) | mod_pos | s->pos_type;
     
     // pos
     int abs_x = x+s->x;
@@ -61,9 +61,9 @@ static inline float eval_lbp_stage_precalc(PreprocessedImage * PI, TStage * s, i
 }
 
 
-static int eval_classifier_lbp_precalc(PreprocessedImage * img, TClassifier * c, int x, int y, unsigned begin, unsigned end, int * features, float * hypotheses, float * response, int * stages)
+static int eval_classifier_lbp_precalc(PreprocessedImage * img, const TClassifier * c, int x, int y, unsigned begin, unsigned end, int * features, float * hypotheses, float * response, int * stages)
 {
-    int mod_pos = get_mod_position(x, y);
+    const int mod_pos = get_mod_position(x, y);
     end = min(end, c->stage_count);
     for (unsigned i = begin; i < end; ++i)
     {
@@ -311,7 +311,7 @@ static int eval_classifier_lrd_bunch16(PreprocessedImage * PI, TClassifier * c, 
 {
     end = min(end, c->stage_count);
     int mod_pos = get_mod_position(x, y);
-    TStage * s;
+    TStage* s;
     int bunch_begin = begin;
     for (s = c->stage+begin; s < c->stage+end; s += 16, bunch_begin += 16)
     {
@@ -321,8 +321,8 @@ static int eval_classifier_lrd_bunch16(PreprocessedImage * PI, TClassifier * c, 
 
         for (int i = 0; i < valid_stages; ++i) // feature idx
         {
-            TStage * stg = s + i;
-            IplImage * conv = &(PI->conv[(int)stg->sz_type]);
+            TStage* const stg = s + i;
+            IplImage* const conv = &(PI->conv[(int)stg->sz_type]);
             
             int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
             int abs_x = x + stg->x;
@@ -331,15 +331,19 @@ static int eval_classifier_lrd_bunch16(PreprocessedImage * PI, TClassifier * c, 
             int pos_y = abs_y / stg->h;
             int block = block_table[table_idx];
 
-            char * base = (char*)(conv->imageData + block * PI->cblock_size[(int)stg->sz_type]) + (pos_y * conv->widthStep) + pos_x;
-            feature_data[0].i8[i] = *(base + 0);// ^ 0x80;
+            const char* base = (char*)(conv->imageData + block * PI->cblock_size[(int)stg->sz_type]) + (pos_y * conv->widthStep) + pos_x;
+            
+	    feature_data[0].i8[i] = *(base + 0);// ^ 0x80;
             feature_data[1].i8[i] = *(base + 1);// ^ 0x80;
             feature_data[2].i8[i] = *(base + 2);// ^ 0x80;
-            base += conv->widthStep;
+
+	    base += conv->widthStep;
             feature_data[3].i8[i] = *(base + 0);// ^ 0x80;
             feature_data[4].i8[i] = *(base + 1);// ^ 0x80;
             feature_data[5].i8[i] = *(base + 2);// ^ 0x80;
-            base += conv->widthStep;
+            
+	    
+	    base += conv->widthStep;
             feature_data[6].i8[i] = *(base + 0);// ^ 0x80;
             feature_data[7].i8[i] = *(base + 1);// ^ 0x80;
             feature_data[8].i8[i] = *(base + 2);// ^ 0x80;
@@ -354,7 +358,7 @@ static int eval_classifier_lrd_bunch16(PreprocessedImage * PI, TClassifier * c, 
         // Eval weak classifiers
         unsigned char * lbp = (unsigned char*)(&responses);
 
-        TStage * stg = s;
+        const TStage* stg = s;
         int stg_idx = bunch_begin;
         while(stg != s + valid_stages)
         {
@@ -381,55 +385,61 @@ static int eval_classifier_lrd_bunch16(PreprocessedImage * PI, TClassifier * c, 
 static int eval_classifier_lrp_bunch16(PreprocessedImage * PI, TClassifier * c, int x, int y, unsigned begin, unsigned end, int * features, float * hypotheses, float * response, int * stages)
 {
     end = min(end, c->stage_count);
-    int mod_pos = get_mod_position(x, y);
-    TStage * s;
+    const int mod_pos = get_mod_position(x, y);
+    TStage* s = 0;
     int bunch_begin = begin;
     for (s = c->stage+begin; s < c->stage+end; s += 16, bunch_begin += 16)
     {
-        int valid_stages = std::min<unsigned long>(c->stage_count - (s - c->stage), 16u);
+        const int valid_stages = std::min<unsigned long>(c->stage_count - (s - c->stage), 16u);
+	
         // Load data
         int128 feature_data[9], A, B;
 
         for (int i = 0; i < valid_stages; ++i) // feature idx
         {
-            TStage * stg = s + i;
-            IplImage * conv = &(PI->conv[(int)stg->sz_type]);
+            const TStage* const stg = s + i;
+            const IplImage* const conv = &(PI->conv[(int)stg->sz_type]);
             
-            int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
-            int abs_x = x + stg->x;
-            int abs_y = y + stg->y;
-            int pos_x = abs_x / stg->w;
-            int pos_y = abs_y / stg->h;
-            int block = block_table[table_idx];
+            const int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
+            const int abs_x = x + stg->x;
+            const int abs_y = y + stg->y;
+            const int pos_x = abs_x / stg->w;
+            const int pos_y = abs_y / stg->h;
+            const int block = block_table[table_idx];
 
-            char * base = (char*)(conv->imageData + block * PI->cblock_size[(int)stg->sz_type]) + (pos_y * conv->widthStep) + pos_x;
+            const char* base = (char*)(conv->imageData + block * PI->cblock_size[(int)stg->sz_type]) + (pos_y * conv->widthStep) + pos_x;
             feature_data[0].i8[i] = *(base + 0);// ^ 0x80;
             feature_data[1].i8[i] = *(base + 1);// ^ 0x80;
             feature_data[2].i8[i] = *(base + 2);// ^ 0x80;
-            base += conv->widthStep;
+            
+	    base += conv->widthStep;
             feature_data[3].i8[i] = *(base + 0);// ^ 0x80;
             feature_data[4].i8[i] = *(base + 1);// ^ 0x80;
             feature_data[5].i8[i] = *(base + 2);// ^ 0x80;
-            base += conv->widthStep;
+            
+	    base += conv->widthStep;
             feature_data[6].i8[i] = *(base + 0);// ^ 0x80;
             feature_data[7].i8[i] = *(base + 1);// ^ 0x80;
             feature_data[8].i8[i] = *(base + 2);// ^ 0x80;
-            A.u8[i] = feature_data[(int)stg->A].u8[i];
+            
+	    A.u8[i] = feature_data[(int)stg->A].u8[i];
             B.u8[i] = feature_data[(int)stg->B].u8[i];
         }
         // xor after loading?
         // xor during PP?
         for (int i = 0; i < 9; ++i) // will be unrolled?
-             feature_data[i].q = _mm_xor_si128(feature_data[i].q, sign_bit.q);
+	{
+	  feature_data[i].q = _mm_xor_si128(feature_data[i].q, sign_bit.q);
+	}
 
         // Eval all 16 features using SIMD
         __m128i responses = eval_lrp_16((__m128i*)feature_data, A.q, B.q);
         _mm_empty();
         
         // Eval weak classifiers
-        unsigned char * lbp = (unsigned char*)(&responses);
+        const unsigned char* lbp = (unsigned char*)(&responses);
 
-        TStage * stg = s;
+        const TStage* stg = s;
         int stg_idx = bunch_begin;
         while(stg != s + valid_stages)
         {
@@ -479,7 +489,10 @@ int scan_image_conv_bunch16(PreprocessedImage * PI, TClassifier * c, ScanParams 
         break;
     }
     
-    if (!eval) return 0;
+    if (!eval) 
+    {
+      return 0;
+    }
      
 
     int features[c->stage_count];
@@ -487,9 +500,12 @@ int scan_image_conv_bunch16(PreprocessedImage * PI, TClassifier * c, ScanParams 
     float response;
     int stages;
 
-    Detection * det = first;
+    Detection* det = first;
 
-    if (det >= last) return 0;
+    if (det >= last) 
+    {
+      return 0;
+    }
  
     for (unsigned y = 0; y < PI->sz.height-c->height; ++y)
     {
@@ -497,11 +513,15 @@ int scan_image_conv_bunch16(PreprocessedImage * PI, TClassifier * c, ScanParams 
         {
             response = 0.0f;
             stages = 0;
-            int d = eval(PI, c, x, y, 0, c->stage_count, features, hypotheses, &response, &stages);
-            if (hist) hist[stages]++;
+            const int d = eval(PI, c, x, y, 0, c->stage_count, features, hypotheses, &response, &stages);
+            if (hist) 
+	    {
+	      hist[stages]++;
+	    }
+	    
             if (d && (response > c->threshold))
             {
-                Detection tmp = {x, y, c->width, c->height, response, 0.0f};
+                const Detection tmp = {x, y, c->width, c->height, response, 0.0f};
                 *det = tmp;
                 ++det;
                 if (det == last)
@@ -515,7 +535,7 @@ int scan_image_conv_bunch16(PreprocessedImage * PI, TClassifier * c, ScanParams 
     return det - first;
 }
 
-int is_classifier_supported_conv_bunch16(TClassifier * c)
+int is_classifier_supported_conv_bunch16(const TClassifier* const c)
 {
     if ((c->tp == LBP || c->tp == LRP || c->tp == LRD) && c->fsz == FSZ_2x2)
         return 1;
@@ -536,31 +556,31 @@ inline float eval_lrd_stage_iconv(
         int * feature)
 {
     // index to tables - depends on feature size, sample position and feature position relative to sample
-    int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
+    const int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
     
     // Get the block of the convolution (depends on feature modulo shift)
-    int block = block_table[table_idx];
+    const int block = block_table[table_idx];
     
     // Get the mask type
-    int mask_type = mask_table[table_idx];
+    const int mask_type = mask_table[table_idx];
     
     // Get the convolution image;
-    IplImage * conv = &(PI->iconv[int(stg->sz_type)]);
-    char * conv_data = conv->imageData;
+    const IplImage* const conv = &(PI->iconv[int(stg->sz_type)]);
+    const char* const conv_data = conv->imageData;
     
     // Get address of the feature in image
-    int data_offset = PI->xtbl[4 * (x + stg->x) + stg->sz_type] + PI->ytbl[4 * (y+stg->y) + stg->sz_type];
+    const int data_offset = PI->xtbl[4 * (x + stg->x) + stg->sz_type] + PI->ytbl[4 * (y+stg->y) + stg->sz_type];
     
-    signed char * data0 = (signed char*)conv_data + PI->iblock_size[int(stg->sz_type)] * block + data_offset;
-    signed char * data1 = data0 + conv->widthStep;
+    const signed char * const data0 = (signed char*)conv_data + PI->iblock_size[int(stg->sz_type)] * block + data_offset;
+    const signed char * const data1 = data0 + conv->widthStep;
     
     // Get the A nd B rank index according to the shift type
 
-    int A_offset = ranks[2 * mask_type + 0];
-    int B_offset = ranks[2 * mask_type + 1];
+    const int A_offset = ranks[2 * mask_type + 0];
+    const int B_offset = ranks[2 * mask_type + 1];
 
-    register __m128i data = _mm_set_epi64(*(__m64*)(data1), *(__m64*)(data0));
-    register __m128i zero = _mm_setzero_si128();
+    const register __m128i data = _mm_set_epi64(*(__m64*)(data1), *(__m64*)(data0));
+    const register __m128i zero = _mm_setzero_si128();
 
 	union {
         __m128i q;
@@ -593,31 +613,31 @@ inline float eval_lrp_stage_iconv(
         int * feature)
 {
     // index to tables - depends on feature size, sample position and feature position relative to sample
-    int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
+    const int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
     
     // Get the block of the convolution (depends on feature modulo shift)
-    int block = block_table[table_idx];
+    const int block = block_table[table_idx];
     
     // Get the mask type
-    int mask_type = mask_table[table_idx];
+    const int mask_type = mask_table[table_idx];
     
     // Get the convolution image;
-    IplImage * conv = &(PI->iconv[int(stg->sz_type)]);
-    char * conv_data = conv->imageData;
+    const IplImage* const conv = &(PI->iconv[int(stg->sz_type)]);
+    const char* const conv_data = conv->imageData;
     
     // Get address of the feature in image
-    int data_offset = PI->xtbl[4 * (x + stg->x) + stg->sz_type] + PI->ytbl[4 * (y+stg->y) + stg->sz_type];
+    const int data_offset = PI->xtbl[4 * (x + stg->x) + stg->sz_type] + PI->ytbl[4 * (y+stg->y) + stg->sz_type];
     
-    signed char * data0 = (signed char*)conv_data + PI->iblock_size[int(stg->sz_type)] * block + data_offset;
-    signed char * data1 = data0 + conv->widthStep;
+    const signed char* const data0 = (signed char*)conv_data + PI->iblock_size[int(stg->sz_type)] * block + data_offset;
+    const signed char* const data1 = data0 + conv->widthStep;
     
     // Get the A nd B rank index according to the shift type
 
-    int A_offset = ranks[2 * mask_type + 0];
-    int B_offset = ranks[2 * mask_type + 1];
+    const int A_offset = ranks[2 * mask_type + 0];
+    const int B_offset = ranks[2 * mask_type + 1];
 
-    register __m128i data = _mm_set_epi64(*(__m64*)(data1), *(__m64*)(data0));
-    register __m128i zero = _mm_setzero_si128();
+    const register __m128i data = _mm_set_epi64(*(__m64*)(data1), *(__m64*)(data0));
+    const register __m128i zero = _mm_setzero_si128();
 
 	union {
         __m128i q;
@@ -652,31 +672,31 @@ float eval_lbp_stage_iconv(
         int * feature)
 {
     // index to tables - depends on feature size, sample position and feature position relative to sample
-    int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
+    const int table_idx = (stg->sz_type << 8) | mod_pos | stg->pos_type;
     
     // Get the block of the convolution (depends on feature modulo shift)
-    int block_id = block_table[table_idx];
+    const int block_id = block_table[table_idx];
     
     // Get the mask type
-    int mask_type = mask_table[table_idx];
+    const int mask_type = mask_table[table_idx];
     
     // Get the convolution image;
-    IplImage * conv = &(PI->iconv[int(stg->sz_type)]);
-    char * conv_data = conv->imageData;
+    const IplImage* const conv = &(PI->iconv[int(stg->sz_type)]);
+    const char* const  conv_data = conv->imageData;
 
     // Get address of the feature in image
-    int dataOffset = PI->xtbl[4 * (x + stg->x) + stg->sz_type] + PI->ytbl[4 * (y+stg->y) + stg->sz_type];
+    const int dataOffset = PI->xtbl[4 * (x + stg->x) + stg->sz_type] + PI->ytbl[4 * (y+stg->y) + stg->sz_type];
     
-    signed char * data0 = (signed char*)conv_data + PI->iblock_size[int(stg->sz_type)] * block_id + dataOffset;
-    signed char * data1 = data0 + conv->widthStep;
+    signed char* const data0 = (signed char*)conv_data + PI->iblock_size[int(stg->sz_type)] * block_id + dataOffset;
+    signed char* const data1 = data0 + conv->widthStep;
 
     // get the center pixel
-    static const int center_offset[4] = {3, 6, 1, 4};
-    signed char * center = (mask_type < 2) ? data0 : data1;
+    const static int center_offset[4] = {3, 6, 1, 4};
+    const signed char* center = (mask_type < 2) ? data0 : data1;
     center += center_offset[mask_type];
     
-    register __m128i data = _mm_set_epi64(*(__m64*)(data1), *(__m64*)(data0));
-    register __m128i zero = _mm_setzero_si128();
+    const register __m128i data = _mm_set_epi64(*(__m64*)(data1), *(__m64*)(data0));
+    const register __m128i zero = _mm_setzero_si128();
     // LBP evaluation
     // Comparison (pixel values to central pixel) result is used
     // to mask LBP weights. The masked vector is then summed up
@@ -712,12 +732,12 @@ int eval_classifier_iconv(
         unsigned begin, unsigned end,
         int * features, float * hypotheses, float * response, int * stages)
 {
-    int mod_pos = get_mod_position(x, y);
+    const int mod_pos = get_mod_position(x, y);
     end = min(end, c->stage_count);
     const int * rank = c->ranks + (8 * begin);
     for (unsigned s = begin; s < end; ++s, rank += 8)
     {
-	    const TStage * stg = c->stage + s;
+	const TStage* const stg = c->stage + s;
         hypotheses[s] = eval(PI, x, y, mod_pos, stg, rank, features + s);
         *response += hypotheses[s];
         //fprintf(stderr, "[%d,%f] ", features[s], hypotheses[s]);
@@ -804,7 +824,7 @@ int scan_image_iconv(PreprocessedImage * PI, TClassifier * c, ScanParams * sp,
     return det - first;
 }
 
-int is_classifier_supported_iconv(TClassifier * c)
+int is_classifier_supported_iconv(const TClassifier* const c)
 {
     if ((c->tp == LBP || c->tp == LRP || c->tp == LRD) && c->fsz == FSZ_2x2)
         return 1;

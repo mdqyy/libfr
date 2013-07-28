@@ -10,9 +10,9 @@
 
 static inline void calc_lbp_16_strip(IplImage * src, IplImage * dst, unsigned base)
 {
-    signed char * src_data = (signed char*)(src->imageData + base);
+    const signed char* src_data = (signed char*)(src->imageData + base);
     unsigned char * dst_data = (unsigned char*)(dst->imageData + base);
-    signed char * src_end = (signed char*)src->imageData + (src->height-1) * src->widthStep;
+    const signed char* const src_end = (signed char*)src->imageData + (src->height-1) * src->widthStep;
    
     __m128i pixels[3];
 
@@ -120,7 +120,7 @@ void calc_LBP11_sse(IplImage * src, IplImage * dst)
 
 void calc_LBP11_simple(IplImage * src, IplImage * dst)
 {
-    unsigned char * src_row = (unsigned char*)src->imageData;
+    const unsigned char* src_row = (unsigned char*)src->imageData;
     unsigned char * dst_row = (unsigned char*)dst->imageData + dst->widthStep + 1;
 
     while (src_row < (unsigned char*)src->imageData + (src->height-3) * src->widthStep)
@@ -129,7 +129,7 @@ void calc_LBP11_simple(IplImage * src, IplImage * dst)
         {
             int values[9];
             int * v_i = values;
-            unsigned char * s_data = src_row + x;
+            const unsigned char* const s_data = src_row + x;
             for (int i = 0; i < 3; ++i)
                 for (int j = 0; j < 3; ++j, ++v_i)
                 {
@@ -150,7 +150,7 @@ void calc_LBP11_simple(IplImage * src, IplImage * dst)
 
 void calc_CSLBP11_simple(IplImage * src, IplImage * dst)
 {
-    unsigned char * src_row = (unsigned char*)src->imageData;
+    const unsigned char * src_row = (unsigned char*)src->imageData;
     unsigned char * dst_row = (unsigned char*)dst->imageData + dst->widthStep + 1;
 
     while (src_row < (unsigned char*)src->imageData + (src->height-3) * src->widthStep)
@@ -159,7 +159,7 @@ void calc_CSLBP11_simple(IplImage * src, IplImage * dst)
         {
             int values[9];
             int * v_i = values;
-            unsigned char * s_data = src_row + x;
+            const unsigned char* const s_data = src_row + x;
             for (int i = 0; i < 3; ++i)
                 for (int j = 0; j < 3; ++j, ++v_i)
                 {

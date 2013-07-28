@@ -30,15 +30,26 @@
 using namespace std;
 
 
-void release_classifier(TClassifier ** classifier)
+void release_classifier(TClassifier** const classifier)
 {
     if ((classifier && *classifier) && ((**classifier).model == C_DYNAMIC))
     {
         TClassifier & c = **classifier;
 
-        if (c.alpha) delete [] c.alpha;
-        if (c.stage) delete [] c.stage;
-        if (c.ranks) delete [] c.ranks;
+        if (c.alpha) 
+	{
+	  delete [] c.alpha;
+	}
+	
+        if (c.stage) 
+	{
+	  delete [] c.stage;
+	}
+	
+        if (c.ranks)
+	{
+	  delete [] c.ranks;
+	}
         
         delete *classifier;
         *classifier = 0;

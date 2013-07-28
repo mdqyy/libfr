@@ -50,8 +50,7 @@ void sum_3x3_regions_intensity(unsigned char * data, int w, int h, unsigned widt
         data+2*blockStep,data+2*blockStep+w,data+2*blockStep+2*w,
     };
 
-    int y;
-    for (y = 0; y < h; ++y)
+    for(int y = 0; y < h; ++y)
     {
         // go through all pixels in row and accumulate
         int x = 0;
@@ -65,10 +64,13 @@ void sum_3x3_regions_intensity(unsigned char * data, int w, int h, unsigned widt
             }
             ++x;
         }
+        
         // set pointers to next line 
         int i;
         for (i = 0; i < 9; ++i)
-            base[i] += widthStep;
+	{
+	  base[i] += widthStep;
+	}
     }
 }
 
@@ -410,14 +412,14 @@ int scan_image_integral(PreprocessedImage * PI, TClassifier * c, ScanParams * sp
     return scan_image_simple(PI, c, sp, first, last, hist, IMG_INTEGRAL);
 }
 
-int is_classifier_supported_intensity(TClassifier * c)
+int is_classifier_supported_intensity(const TClassifier * c)
 {
     if (c->tp == LBP || c->tp == LRP || c->tp == LRD)
         return 1;
     return 0;
 }
 
-int is_classifier_supported_integral(TClassifier * c)
+int is_classifier_supported_integral(const TClassifier * c)
 {
     if (c->tp == LBP || c->tp == LRP || c->tp == LRD)
         return 1;

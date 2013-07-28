@@ -39,18 +39,18 @@ void init_preprocess()
 }
 
 
-static inline int align2(int x)
+static inline int align2(const int& x)
 {
     return (x + 1) & ~1;
 }
 
-void integrate(IplImage * src, IplImage * dst)
+void integrate(const IplImage* const src, IplImage * dst)
 {
     assert(src->width == dst->width);
     assert(src->height == dst->height);
 
-    unsigned char * srcbase = (unsigned char*)src->imageData;
-	unsigned * dstbase = (unsigned*)dst->imageData;
+    const unsigned char* srcbase = (unsigned char*)src->imageData;
+	unsigned* dstbase = (unsigned*)dst->imageData;
 
 	// top-left corner
 	*dstbase = *srcbase;
@@ -79,17 +79,18 @@ void integrate(IplImage * src, IplImage * dst)
 
 static void interleaved_convolution(
         PreprocessedImage * PI,
-        IplImage * src,
+        const IplImage* const src,
         int i)
 {
     IplImage * tmp = &(PI->tmp);
-    IplImage * conv = &(PI->conv[i]);
-    CvMat * k = &(kernel[i]);
+    const IplImage* const conv = &(PI->conv[i]);
+    const CvMat* const k = &(kernel[i]);
 
     // src -> tmp
     cvFilter2D(src, tmp, k, cvPoint(0,0));
 
-    int block_size = PI->cblock_size[i];
+    const int block_size = PI->cblock_size[i];
+    
     /*
     cerr << i <<  ":\n";
     cerr << "conv: " << conv->widthStep << "x" << conv->height << "; blocks_size=" <<  block_size << endl;
@@ -99,8 +100,9 @@ static void interleaved_convolution(
     // Rearrange blocks
     // tmp -> conv
     //
-    unsigned char * dst_end = (unsigned char*)conv->imageData + (conv->height * conv->widthStep);
-    unsigned char * src_end = (unsigned char*)tmp->imageData + (tmp->height * tmp->widthStep);
+    
+    const unsigned char * dst_end = (unsigned char*)conv->imageData + (conv->height * conv->widthStep);
+    const unsigned char * src_end = (unsigned char*)tmp->imageData + (tmp->height * tmp->widthStep);
 
     for (int v = 0; v < k->rows; ++v)
         for (int u = 0; u < k->cols; ++u)
@@ -132,16 +134,17 @@ static void interleaved_convolution(
 
 
 static void rearrange_convolution(
-        PreprocessedImage * PI,
+        const PreprocessedImage* const PI,
         int i)
 {
-    IplImage * conv = &(PI->conv[i]);
-    IplImage * iconv = &(PI->iconv[i]);
+    const IplImage* const conv = &(PI->conv[i]);
+    const IplImage* const iconv = &(PI->iconv[i]);
+    
     // Rearrange 2x2
     // conv -> iconv
-    char * row1 = conv->imageData;
-    char * row2 = conv->imageData + conv->widthStep;
-    char * dst = iconv->imageData;
+    const char* row1 = conv->imageData;
+    const char* row2 = conv->imageData + conv->widthStep;
+    char* dst = iconv->imageData;
 
     while (row2 < conv->imageData + (conv->height - 1) * conv->widthStep)
     {
@@ -165,10 +168,12 @@ static int align_2(int x)
 
 PreprocessedImage * create_preprocessed_image(CvSize src_sz)
 {
-    PreprocessedImage * PI = new PreprocessedImage();
+    PreprocessedImage* const PI = new PreprocessedImage();
 
     if (!PI)
-        return 0;
+    {
+      return 0;
+    }
 
     src_sz.width = align_2(src_sz.width);
     src_sz.height = align_2(src_sz.height);
@@ -270,9 +275,13 @@ void preprocess_image(IplImage * img, PreprocessedImage * PI, int options)
     if (options & PP_COPY)
     {
         if (img->width == PI->sz.width && img->height == PI->sz.height)
-            cvCopy(img, &(PI->intensity));
+	{
+	  cvCopy(img, &(PI->intensity));
+	}
         else
-            cvResize(img, &(PI->intensity), CV_INTER_LINEAR);
+	{
+	  cvResize(img, &(PI->intensity), CV_INTER_LINEAR);
+	}
     }
 
     if (options & PP_INTEGRAL)
@@ -312,12 +321,12 @@ void preprocess_image(IplImage * img, PreprocessedImage * PI, int options)
 
 PreprocessedPyramid * create_pyramid(CvSize base_sz, CvSize min_sz, int octaves, int levels_per_octave)
 {
-    PreprocessedPyramid * PP = new PreprocessedPyramid();
+    PreprocessedPyramid* const PP = new PreprocessedPyramid();
 
     PP->octaves = octaves;
     PP->levels_per_octave = levels_per_octave;
 
-    float scale = pow(2.0f, 1.0f/levels_per_octave);
+    const float scale = pow(2.0f, 1.0f/levels_per_octave);
 
     for (int octave = 0; octave < octaves; ++octave)
     {
@@ -338,13 +347,16 @@ PreprocessedPyramid * create_pyramid(CvSize base_sz, CvSize min_sz, int octaves,
     return PP;
 }
 
-void release_pyramid(PreprocessedPyramid ** PP)
+void release_pyramid(PreprocessedPyramid** PP)
 {
     if (PP && *PP)
     {
-        PreprocessedPyramid * pp = *PP;
+        PreprocessedPyramid* const pp = *PP;
         for (unsigned i = 0; i < pp->PI.size(); ++i)
-            release_preprocessed_image(&(pp->PI[i]));
+	{
+	  release_preprocessed_image(&(pp->PI[i]));
+	}
+	
         delete *PP;
         *PP = 0;
     }
@@ -355,17 +367,20 @@ void insert_image(IplImage * img, PreprocessedPyramid * PP, int options)
     options |= PP_COPY;
     preprocess_image(img, PP->PI[0], options);
     
-    int max_level = std::min<int>(unsigned(PP->octaves * PP->levels_per_octave), PP->PI.size());
+    const int max_level = std::min<int>(unsigned(PP->octaves * PP->levels_per_octave), PP->PI.size());
 
     for (int octave_base = 0; octave_base < max_level; octave_base += PP->levels_per_octave)
     {
-        IplImage * src = &(PP->PI[octave_base]->intensity);
+        IplImage* const src = &(PP->PI[octave_base]->intensity);
         for (int i = 1; i < PP->levels_per_octave && i+octave_base < max_level; ++i)
         {
             preprocess_image(src, PP->PI[octave_base+i], options);
         }
-        if (octave_base+PP->levels_per_octave < max_level)
-            preprocess_image(src, PP->PI[octave_base+PP->levels_per_octave], options);
+        
+        if ((octave_base + PP)->levels_per_octave < max_level)
+	{
+	  preprocess_image(src, PP->PI[octave_base+PP->levels_per_octave], options);
+	}
     }
 }
 

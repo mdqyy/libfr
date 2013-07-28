@@ -6,13 +6,13 @@
 using namespace std;
 
 // Shuffle alphas for LRP
-int init_classifier(TClassifier * c)
+int init_classifier(TClassifier* c)
 {
     float * stg_alpha = c->alpha;
 
     for (unsigned s = 0; s < c->stage_count; ++s, stg_alpha += c->alpha_count)
     {
-        TStage * stage = c->stage + s;
+        TStage* const stage = c->stage + s;
 
         if (stage->w > 2 || stage->h > 2)
             return 0;
@@ -36,7 +36,7 @@ void prepare_classifier(TClassifier * c, PreprocessedImage * PI, int options)
 
     if ((options & RECALC_OFFSET))
     {
-        IplImage * img;
+        const IplImage* img = 0;
         int px_sz;
         if (options & OFFSET_INTEGRAL)
         {
@@ -48,6 +48,7 @@ void prepare_classifier(TClassifier * c, PreprocessedImage * PI, int options)
             img = &(PI->intensity);
             px_sz = sizeof(char);
         }
+        
         for (unsigned s = 0; s < c->stage_count; ++s)
         {
             TStage * stage = (TStage*)c->stage + s;
@@ -88,11 +89,11 @@ int detect_objects(
         float scale,
         int * hist)
 {
-    CvSize base_sz = PP->PI[0]->sz;
+    const CvSize base_sz = PP->PI[0]->sz;
 
     vector<PreprocessedImage*>::iterator PI = PP->PI.begin();
 
-    Detection * det = first;
+    Detection* det = first;
 
     while (PI != PP->PI.end())
     {
@@ -105,7 +106,7 @@ int detect_objects(
 
         int n = scan_image(*PI, c, sp, det, last, hist);
         
-        for (Detection * r = det; r < (det + n); ++r)
+        for (Detection* r = det; r < (det + n); ++r)
         {
             r->x *= scale_x;
             r->y *= scale_y;

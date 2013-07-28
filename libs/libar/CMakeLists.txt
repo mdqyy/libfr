@@ -42,6 +42,6 @@ include_directories(${LIBXML2_INCLUDE_DIRS})
 target_link_libraries(libar ${LIBXML2_LIBRARIES})
 
 # FFmpeg dependency
-pkg_check_modules(FFMPEG ffmpeg)
-include_directories(${FFMPEG_INCLUDE_DIRS})
-target_link_libraries(libar ${FFMPEG_LIBRARIES})
+# pkg_check_modules(FFMPEG ffmpeg)
+# include_directories(${FFMPEG_INCLUDE_DIRS})
+# target_link_libraries(libar ${FFMPEG_LIBRARIES})

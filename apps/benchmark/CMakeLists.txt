@@ -10,7 +10,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -msse3 -mfpmath=both -O3 -fopenmp 
 find_package(PkgConfig)
 
 # Add library includes
-include_directories(${CMAKE_SOURCE_DIR}/lib/include)
+include_directories(${CMAKE_SOURCE_DIR}/libs/libar/include)
 
 set(APP_SOURCES
   benchmark.cpp
@@ -31,5 +31,5 @@ set(ARGTABLE_LIBS argtable2)
 include_directories(${ARGTABLE_INCLUDE_DIRS})
 target_link_libraries(benchmark ${ARGTABLE_LIBRARIES})
 
-# libfr itself dependency
-target_link_libraries(benchmark libfr)
+# libar itself dependency
+target_link_libraries(benchmark libar)

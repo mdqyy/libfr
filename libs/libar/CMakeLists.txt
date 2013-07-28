@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
-project(libfr)
+project(libar)
 
 # C Flags
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -ggdb3 -msse4 -D DEBUG -D _OPENCV")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -ggdb3 -msse4 -mfpmath=both -ffast-math -fomit-frame-pointer -finline-functions -D DEBUG -D _OPENCV")
 
 # CXX Flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -ggdb3 -msse4 -D DEBUG -D _OPENCV")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -ggdb3 -msse4 -mfpmath=both -ffast-math -fomit-frame-pointer -finline-functions -D DEBUG -D _OPENCV -Wno-narrowing")
 
 # Project specific includes
 include_directories("${PROJECT_SOURCE_DIR}/include")
@@ -23,7 +23,7 @@ set(LIB_SOURCES
   src/simplexml.cpp
 )
 
-add_library(libfr ${LIB_SOURCES})
+add_library(libar ${LIB_SOURCES})
 
 # Package finder
 find_package(PkgConfig)
@@ -34,14 +34,14 @@ find_package(PkgConfig)
 pkg_check_modules(OPENCV opencv)
 include_directories(${OPENCV_INCLUDE_DIRS})
 set(OPENCV_LIBS opencv_core opencv_imgproc opencv_calib3d opencv_video opencv_features2d opencv_ml opencv_highgui opencv_objdetect opencv_contrib opencv_legacy opencv_gpu)
-target_link_libraries(libfr ${OPENCV_LIBS})
+target_link_libraries(libar ${OPENCV_LIBS})
 
 # LibXml2 dependency
 pkg_check_modules(LIBXML2 libxml-2.0)
 include_directories(${LIBXML2_INCLUDE_DIRS})
-target_link_libraries(libfr ${LIBXML2_LIBRARIES})
+target_link_libraries(libar ${LIBXML2_LIBRARIES})
 
 # FFmpeg dependency
-pkg_check_modules(FFMPEG ffmpeg)
-include_directories(${FFMPEG_INCLUDE_DIRS})
-target_link_libraries(libfr ${FFMPEG_LIBRARIES})
+# pkg_check_modules(FFMPEG ffmpeg)
+# include_directories(${FFMPEG_INCLUDE_DIRS})
+# target_link_libraries(libar ${FFMPEG_LIBRARIES})

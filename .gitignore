@@ -17,4 +17,4 @@ build/CMakeCache.txt
 build/Makefile
 build/CMakeFiles/
 build/apps/
-build/lib/
+build/libs/

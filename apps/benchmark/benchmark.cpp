@@ -21,6 +21,7 @@
 #include <libgen.h>
 #include <iostream>
 #include <argtable2.h>
+#include <cassert>
 
 using namespace std;
 
@@ -32,17 +33,25 @@ CvHaarClassifierCascade* load_object_detector( const char* cascade_path )
 int64 opencv_detect_objects(IplImage * image, CvHaarClassifierCascade * cascade, int t)
 {
     CvMemStorage * storage = cvCreateMemStorage(0);
-    CvSeq * faces;
+    volatile CvSeq * faces;
 
     int64 t0 = cvGetTickCount();
     for (int i = 0; i < t; ++i)
+    {
         faces = cvHaarDetectObjects( image, cascade, storage, 1.18, 1, 0);
+        assert(faces != 0 && "faces != 0 !");
+        if(faces == 0)
+        {
+            continue;
+        }
+    }
+
     // clear seq? mem leak?
     int64 t1 = cvGetTickCount();
 
     cvReleaseMemStorage( &storage );
 
-    return t1 - t0;
+    return (t1 - t0);
 }
 
 int align2(int x)

@@ -5,7 +5,7 @@ project(libar)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -ggdb3 -msse4 -D DEBUG -D _OPENCV")
 
 # CXX Flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -ggdb3 -msse4 -D DEBUG -D _OPENCV")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -ggdb3 -msse4 -D DEBUG -D _OPENCV -Wno-narrowing")
 
 # Project specific includes
 include_directories("${PROJECT_SOURCE_DIR}/include")

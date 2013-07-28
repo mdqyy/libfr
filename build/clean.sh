@@ -20,7 +20,7 @@ if [ -d apps ]; then
 	rm -rf apps
 fi
 
-if [ -d lib ]; then
-	rm -rf lib
+if [ -d libs ]; then
+	rm -rf libs
 fi
 

@@ -23,7 +23,7 @@ set(LIB_SOURCES
   src/simplexml.cpp
 )
 
-add_library(libar ${LIB_SOURCES})
+add_library(libar SHARED ${LIB_SOURCES})
 
 # Package finder
 find_package(PkgConfig)

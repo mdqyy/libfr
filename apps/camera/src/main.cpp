@@ -4,8 +4,8 @@
 
 #include <opencv/cv.h>
 #include <opencv/cxcore.h>
-#include <opencv2/highgui.hpp>
-#include <opencv2/highgui/highgui_c.h>
+#include <opencv/highgui.h>
+#include <opencv2/highgui/highgui.hpp>
  
 using namespace cv;
  

@@ -55,6 +55,7 @@ bool capture(void)
 
 int main(int argc, char** argv)
 {
+    // Specify program options
     po::options_description desc("Allowed options");
         desc.add_options()
             ("help,h", "produce help message")
@@ -62,6 +63,8 @@ int main(int argc, char** argv)
             ;
 
     po::variables_map vm;
+
+    // Try to parse program options
     try
     {
         po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -74,17 +77,20 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
 
+    // Print help and exit if needed
     if (vm.count("help"))
     {
         std::cout << desc << std::endl;
         return EXIT_SUCCESS;
     }
 
+    // Capture from camera if requested
     if(vm.count("capture"))
     {
         capture();
         return EXIT_SUCCESS;
     }
   
+    // Exit successfuly ...
     return EXIT_SUCCESS;
 }

@@ -9,7 +9,9 @@ project(libfr)
 
 # Project specific sources
 set(LIB_SOURCES 
-  src/libfr.cpp
+    src/libfr.cpp
+
+    src/base_app.cpp
 )
 
 # Package finder

@@ -7,6 +7,8 @@ namespace fr {
 	public:
 		BaseApp();
 		virtual ~BaseApp();
+
+        virtual int Run(int argc, char** argv) = 0;
 		
 	}; // class BaseApp
 }; // namespace fr

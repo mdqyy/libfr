@@ -13,6 +13,7 @@ add_executable(camera ${APP_SOURCES})
 # Package finder
 find_package(PkgConfig)
 
+# Find boost package
 find_package(Boost COMPONENTS program_options REQUIRED)
 
 # OpenCV dependency

@@ -3,6 +3,7 @@ project(demo)
 
 # Add library includes
 include_directories(${CMAKE_SOURCE_DIR}/libs/libar/include)
+include_directories(${CMAKE_SOURCE_DIR}/lbis/libfr/include)
 
 set(APP_SOURCES
   src/main.cpp

@@ -5,6 +5,16 @@
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
 
+#include <libfr.h>
+
+namespace fr {
+	namespace app {
+		class AppDemo : public BaseApp 
+		{
+		}; // AppDemo
+	}; // namespace app
+}; // namespace fr
+
 int main(int argc, char** argv)
 {
     // Specify program options

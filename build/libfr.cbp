@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="libfr" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;CMake Files\apps\;CMake Files\apps\benchmark\;CMake Files\apps\camera\;CMake Files\apps\detector\;CMake Files\libs\;CMake Files\libs\libar\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/korczis/dev/libfr/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/korczis/dev/libfr/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="benchmark">
+         <Option output="/home/korczis/dev/libfr/build/apps/benchmark/benchmark" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/apps/benchmark" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 benchmark" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="benchmark/fast">
+         <Option output="/home/korczis/dev/libfr/build/apps/benchmark/benchmark" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/apps/benchmark" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 benchmark/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/benchmark/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="camera">
+         <Option output="/home/korczis/dev/libfr/build/apps/camera/camera" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/apps/camera" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 camera" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="camera/fast">
+         <Option output="/home/korczis/dev/libfr/build/apps/camera/camera" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/apps/camera" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 camera/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/camera/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="detector">
+         <Option output="/home/korczis/dev/libfr/build/apps/detector/detector" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/apps/detector" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/apps/detector/include" />
+            <Add directory="/usr/include/libxml2" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 detector" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="detector/fast">
+         <Option output="/home/korczis/dev/libfr/build/apps/detector/detector" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/apps/detector" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/apps/detector/include" />
+            <Add directory="/usr/include/libxml2" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 detector/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/apps/detector/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="libar">
+         <Option output="/home/korczis/dev/libfr/build/libs/libar/liblibar.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/libs/libar" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include" />
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include/abr" />
+            <Add directory="/usr/include/libxml2" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 libar" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="libar/fast">
+         <Option output="/home/korczis/dev/libfr/build/libs/libar/liblibar.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/korczis/dev/libfr/build/libs/libar" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include" />
+            <Add directory="/home/korczis/dev/libfr/libs/libar/include/abr" />
+            <Add directory="/usr/include/libxml2" />
+            <Add directory="/usr/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 libar/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/korczis/dev/libfr/build/libs/libar/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/korczis/dev/libfr/apps/benchmark/benchmark.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/camera/src/main.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/detector/src/classifier.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/detector/src/demo.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/detector/src/image.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/detector/src/lrd_engine.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/detector/src/simplexml.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/classifier.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/const.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/core.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/core_simple.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/core_sse.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/lbp.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/preprocess.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/src/simplexml.cpp">
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\apps\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/benchmark/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\apps\benchmark\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/benchmark/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\apps\benchmark\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/camera/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\apps\camera\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/camera/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\apps\camera\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/detector/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\apps\detector\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/apps/detector/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\apps\detector\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\libs\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\libs\libar\" />
+      </Unit>
+      <Unit filename="/home/korczis/dev/libfr/libs/libar/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\libs\libar\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

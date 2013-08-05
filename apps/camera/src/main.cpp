@@ -60,6 +60,7 @@ int main(int argc, char** argv)
         desc.add_options()
             ("help,h", "produce help message")
             ("capture,c", "capture from camera")
+            ("action,a", po::value<std::string>(), "action")
             ;
 
     po::variables_map vm;
@@ -78,14 +79,14 @@ int main(int argc, char** argv)
     }
 
     // Print help and exit if needed
-    if (vm.count("help"))
+    if (vm.count("help") || vm["action"].as<std::string>() == "help")
     {
         std::cout << desc << std::endl;
         return EXIT_SUCCESS;
     }
 
     // Capture from camera if requested
-    if(vm.count("capture"))
+    if(vm.count("capture") || vm["action"].as<std::string>() == "capture")
     {
         capture();
         return EXIT_SUCCESS;

@@ -12,6 +12,12 @@ set(LIB_SOURCES
   src/libfr.cpp
 )
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
+# Package finder
+find_package(PkgConfig)
+
+# Find boost package
+find_package(Boost COMPONENTS program_options REQUIRED)
+
+include_directories(${PROJECT_SOURCE_DIR}/include ${Boost_INCLUDE_DIR})
 add_library(libfr SHARED ${LIB_SOURCES})
-target_link_libraries(libfr libar)
+target_link_libraries(libfr ${Boost_LIBRARIES} libar)

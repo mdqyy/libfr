@@ -72,7 +72,7 @@ int main(int argc, char** argv)
     }
     catch(const std::exception& e)
     {
-        std::cout << "Unable to parse program options." << std::endl;
+        std::cout << "Unable to parse program options, reason: " << e.what() << std::endl;
         std::cout << desc << std::endl;
         return EXIT_FAILURE;
     }

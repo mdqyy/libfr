@@ -12,39 +12,13 @@ namespace po = boost::program_options;
  
 using namespace cv;
  
-int main(int argc, char** argv)
+bool capture(void)
 {
-    po::options_description desc("Allowed options");
-        desc.add_options()
-            ("help,h", "produce help message")
-            ;
-
-    po::variables_map vm;
-    try
-    {
-        po::store(po::parse_command_line(argc, argv, desc), vm);
-        po::notify(vm);
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "Unable to parse program options." << std::endl;
-        std::cout << desc << std::endl;
-        return EXIT_FAILURE;
-    }
-
-    if (vm.count("help"))
-    {
-        std::cout << desc << std::endl;
-        return EXIT_SUCCESS;
-    }
-
-    std::cout << "Hello World! I am nice camera app!" << std::endl;
-  
     CvCapture* capture = cvCaptureFromCAM(0);
-    if ( !capture ) {
+    if (capture == NULL) {
         fprintf( stderr, "ERROR: capture is NULL \n" );
         getchar();
-        return EXIT_FAILURE;
+        return false;
     }
 
     // Create a window in which the captured images will be presented
@@ -76,5 +50,41 @@ int main(int argc, char** argv)
     cvReleaseCapture( &capture );
     cvDestroyWindow( "mywindow" );
 
+    return true;
+}
+
+int main(int argc, char** argv)
+{
+    po::options_description desc("Allowed options");
+        desc.add_options()
+            ("help,h", "produce help message")
+            ("capture,c", "capture from camera")
+            ;
+
+    po::variables_map vm;
+    try
+    {
+        po::store(po::parse_command_line(argc, argv, desc), vm);
+        po::notify(vm);
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Unable to parse program options." << std::endl;
+        std::cout << desc << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    if (vm.count("help"))
+    {
+        std::cout << desc << std::endl;
+        return EXIT_SUCCESS;
+    }
+
+    if(vm.count("capture"))
+    {
+        capture();
+        return EXIT_SUCCESS;
+    }
+  
     return EXIT_SUCCESS;
 }

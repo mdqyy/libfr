@@ -4,6 +4,10 @@ if [ -f cmake_install.cmake ]; then
 	rm cmake_install.cmake
 fi
 
+if [ -f libfr.cbp ]; then
+	rm libfr.cbp
+fi
+
 if [ -f CMakeCache.txt ]; then
 	rm CMakeCache.txt
 fi
@@ -23,4 +27,5 @@ fi
 if [ -d libs ]; then
 	rm -rf libs
 fi
+
 

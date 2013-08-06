@@ -11,11 +11,8 @@ namespace fr {
         public:
             int Run(int argc, char** argv)
             {
-                InitOptions(this->Opts);
-
-                ParseOptions(argc, argv, this->Opts, this->Args);
-
-                return ProcessOptions();
+                // You are right. This is overriden just for educational purposes.
+                return BaseApp::Run(argc, argv);
             }
 		}; // AppDemo
 	}; // namespace app

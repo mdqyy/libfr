@@ -18,3 +18,7 @@ build/Makefile
 build/CMakeFiles/
 build/apps/
 build/libs/
+
+# User specific files
+*.user
+

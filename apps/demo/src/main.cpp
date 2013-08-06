@@ -11,23 +11,11 @@ namespace fr {
         public:
             int Run(int argc, char** argv)
             {
-                // Specify program options
-                po::options_description desc("Allowed options");
-                    desc.add_options()
-                        ("help,h", "produce help message")
-                        ;
+                InitOptions(this->Opts);
 
-                ParseOptions(argc, argv, desc, this->Args);
+                ParseOptions(argc, argv, this->Opts, this->Args);
 
-                // Print help and exit if needed
-                if (Args.count("help"))
-                {
-                    std::cout << desc << std::endl;
-                    return EXIT_SUCCESS;
-                }
-
-                // Exit successfuly ...
-                return EXIT_SUCCESS;
+                return ProcessOptions();
             }
 		}; // AppDemo
 	}; // namespace app

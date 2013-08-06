@@ -2,9 +2,6 @@
 #include <cstdlib>
 #include <iostream>
 
-#include <boost/program_options.hpp>
-namespace po = boost::program_options;
-
 #include <libfr.h>
 
 namespace fr {
@@ -20,24 +17,10 @@ namespace fr {
                         ("help,h", "produce help message")
                         ;
 
-                // Container for program options
-                po::variables_map vm;
-
-                // Try to parse program options
-                try
-                {
-                    po::store(po::parse_command_line(argc, argv, desc), vm);
-                    po::notify(vm);
-                }
-                catch(const std::exception& e)
-                {
-                    std::cout << "Unable to parse program options, reason: " << e.what() << std::endl;
-                    std::cout << desc << std::endl;
-                    return EXIT_FAILURE;
-                }
+                ParseOptions(argc, argv, desc, this->Args);
 
                 // Print help and exit if needed
-                if (vm.count("help"))
+                if (Args.count("help"))
                 {
                     std::cout << desc << std::endl;
                     return EXIT_SUCCESS;

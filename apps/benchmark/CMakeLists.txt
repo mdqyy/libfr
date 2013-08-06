@@ -32,4 +32,4 @@ include_directories(${ARGTABLE_INCLUDE_DIRS})
 target_link_libraries(benchmark ${ARGTABLE_LIBRARIES})
 
 # libar itself dependency
-target_link_libraries(benchmark libar)
+target_link_libraries(benchmark libfr)

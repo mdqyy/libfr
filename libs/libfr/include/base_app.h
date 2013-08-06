@@ -17,7 +17,7 @@ namespace fr {
 
             ParseOptions(argc, argv, this->Opts, this->Args);
 
-            return ProcessOptions();
+            return ProcessOptions(this->Opts, this->Args);
         }
 		
 	protected:
@@ -51,12 +51,12 @@ namespace fr {
                 }
         }
 
-        virtual int ProcessOptions(void)
+        static int ProcessOptions(const po::options_description& desc, const po::variables_map& args)
         {
             // Print help and exit if needed
-            if (Args.count("help"))
+            if (args.count("help"))
             {
-                std::cout << this->Opts << std::endl;
+                std::cout << desc << std::endl;
                 return EXIT_SUCCESS;
             }
 

@@ -52,8 +52,8 @@ namespace fr {
                 return EXIT_SUCCESS;
             }
 		}; // AppDemo
-	}; // namespace app
-}; // namespace fr
+    } // namespace app
+} // namespace fr
 
 int main(int argc, const char** argv)
 {

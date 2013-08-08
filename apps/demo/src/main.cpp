@@ -70,7 +70,7 @@ namespace fr {
                 // If no arguments were specified print help and exit
                 if(Argc < 1)
                 {
-                    std::cout << "Zabiju!" << std::endl;
+                    PrintHelpMessage();
                     return EXIT_FAILURE;
                 }
 

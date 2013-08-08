@@ -65,12 +65,18 @@ namespace fr {
             // Print help and exit if needed
             if (Args.count("help"))
             {
-                std::cout << Opts << std::endl;
+                PrintHelpMessage();
                 return EXIT_SUCCESS;
             }
 
             // Exit successfuly ...
             return EXIT_SUCCESS;
+        }
+
+    protected:
+        void PrintHelpMessage()
+        {
+            std::cout << Opts << std::endl;
         }
                 
 	}; // class BaseApp

@@ -32,8 +32,6 @@ namespace fr {
 
             /* virtual */ int ProcessOptions()
             {
-                BaseApp::ProcessOptions();
-
                 // GUI
                 if(Args.count("gui"))
                 {
@@ -48,8 +46,8 @@ namespace fr {
                     return app.exec();
                 }
 
-                // Exit successfuly ...
-                return EXIT_SUCCESS;
+                // Let base process it ...
+                return BaseApp::ProcessOptions();
             }
 		}; // AppDemo
     } // namespace app

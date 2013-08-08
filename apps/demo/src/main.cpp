@@ -61,13 +61,19 @@ namespace fr {
                     std::cout << "Running the test." << std::endl;
                     // Tests that the Foo::Bar() method does Abc.
 
-                    // ASSERT_TRUE(0 == 0);
+                    Test();
 
                     return EXIT_SUCCESS;
                 }
 
                 // Let base process it ...
                 return BaseApp::ProcessOptions();
+            }
+
+        private:
+            void Test()
+            {
+                // ASSERT_TRUE(true);
             }
 		}; // AppDemo
     } // namespace app

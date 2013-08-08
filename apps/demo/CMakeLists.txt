@@ -51,4 +51,5 @@ qt5_use_modules(demo Widgets)
 find_package(GTest)
 
 include_directories(${GTEST_INCLUDE_DIRS})
-target_link_libraries(demo ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
+# target_link_libraries(demo ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
+ target_link_libraries(demo ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)

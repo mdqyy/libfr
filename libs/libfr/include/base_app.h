@@ -11,16 +11,22 @@ namespace fr {
 		BaseApp();
 		virtual ~BaseApp();
 
-        virtual int Run(int argc, char** argv)
+        virtual int Run(int argc, const char** argv)
         {
-            InitOptions(this->Opts);
+            InitOptions();
 
-            ParseOptions(argc, argv, this->Opts, this->Args);
+            ParseOptions(argc, argv);
 
-            return ProcessOptions(this->Opts, this->Args);
+            return ProcessOptions();
         }
 		
 	protected:
+        // Argc
+        int Argc;
+
+        // Argv
+        const char** Argv;
+
 		// Available program options;
 		po::options_description Opts;
 
@@ -28,35 +34,38 @@ namespace fr {
         po::variables_map Args;
 
 
-        static void InitOptions(po::options_description& desc)
+        virtual void InitOptions()
         {
             // Specify program options
-            desc.add_options()
+            Opts.add_options()
                 ("help,h", "produce help message")
                 ;
         }
 
-        static void ParseOptions(int argc, char** argv, const po::options_description& desc, po::variables_map& vm) 
+        virtual void ParseOptions(int argc, const char** argv)
         {
-				// Try to parse program options
-                try
-                {
-                    po::store(po::parse_command_line(argc, argv, desc), vm);
-                    po::notify(vm);
-                }
-                catch(const std::exception& e)
-                {
-                    std::cout << "Unable to parse program options, reason: " << e.what() << std::endl;
-                    std::cout << desc << std::endl;
-                }
+            Argc = argc;
+            Argv = argv;
+
+            // Try to parse program options
+            try
+            {
+                po::store(po::parse_command_line(argc, argv, Opts), Args);
+                po::notify(Args);
+            }
+            catch(const std::exception& e)
+            {
+                std::cout << "Unable to parse program options, reason: " << e.what() << std::endl;
+                std::cout << Opts << std::endl;
+            }
         }
 
-        static int ProcessOptions(const po::options_description& desc, const po::variables_map& args)
+        virtual int ProcessOptions()
         {
             // Print help and exit if needed
-            if (args.count("help"))
+            if (Args.count("help"))
             {
-                std::cout << desc << std::endl;
+                std::cout << Opts << std::endl;
                 return EXIT_SUCCESS;
             }
 

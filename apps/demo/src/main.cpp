@@ -15,51 +15,47 @@ namespace fr {
         class AppDemo : public BaseApp
 		{
         public:
-            int Run(int argc, char** argv)
+            /* virtual */ void InitOptions()
+            {
+                // Specify program options
+                Opts.add_options()
+                    ("help,h", "produce help message")
+                    ("gui,g", "show gui")
+                    ;
+            }
+
+            /* virtual */ int Run(int argc, const char** argv)
             {
                 // You are right. This is overriden just for educational purposes.
                 return BaseApp::Run(argc, argv);
+            }
+
+            /* virtual */ int ProcessOptions()
+            {
+                BaseApp::ProcessOptions();
+
+                // GUI
+                if(Args.count("gui"))
+                {
+                    QApplication app(Argc, const_cast<char**>(Argv));
+
+                    QWidget window;
+
+                    window.resize(250, 150);
+                    window.setWindowTitle("Simple example");
+                    window.show();
+
+                    return app.exec();
+                }
+
+                // Exit successfuly ...
+                return EXIT_SUCCESS;
             }
 		}; // AppDemo
 	}; // namespace app
 }; // namespace fr
 
-int main(int argc, char** argv)
+int main(int argc, const char** argv)
 {
-    // Specify program options
-    po::options_description desc("Allowed options");
-        desc.add_options()
-            ("help,h", "produce help message")
-            ("gui,g", "show gui")
-            ;
-
-    po::variables_map vm;
-
-    // Try to parse program options
-    try
-    {
-        po::store(po::parse_command_line(argc, argv, desc), vm);
-        po::notify(vm);
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "Unable to parse program options, reason: " << e.what() << std::endl;
-        std::cout << desc << std::endl;
-        return EXIT_FAILURE;
-    }
-
-    if(vm.count("gui"))
-    {
-        QApplication app(argc, argv);
-
-        QWidget window;
-
-        window.resize(250, 150);
-        window.setWindowTitle("Simple example");
-        window.show();
-
-        return app.exec();
-    }
-
     return fr::app::AppDemo().Run(argc, argv);
 }

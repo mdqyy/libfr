@@ -45,4 +45,6 @@ set_target_properties(Qt5::Core PROPERTIES MAP_IMPORTED_CONFIG_COVERAGE "RELEASE
 qt5_use_modules(demo Widgets)
 
 # Google test package
+# See http://www.rad.upenn.edu/sbia/software/basis/apidoc/latest/group__CMakeFindModules.html
+# See http://www.rad.upenn.edu/sbia/software/basis/apidoc/latest/FindGTest_8cmake.html
 find_package(GTest)

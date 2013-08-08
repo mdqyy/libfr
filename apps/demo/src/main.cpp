@@ -17,9 +17,11 @@ namespace fr {
         public:
             /* virtual */ void InitOptions()
             {
+                // Init parent options
+                BaseApp::InitOptions();
+
                 // Specify program options
                 Opts.add_options()
-                    ("help,h", "produce help message")
                     ("gui,g", "show gui")
                     ;
             }

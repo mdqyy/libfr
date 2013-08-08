@@ -19,7 +19,7 @@ namespace fr {
         public:
             static const unsigned short DEFAULT_WINDOW_WIDTH = 250;
             static const unsigned short DEFAULT_WINDOW_HEIGHT = 150;
-            // static const char* DEFAULT_WINDOW_TITLE = "Demo";
+            static const char* DEFAULT_WINDOW_TITLE;
 
         public:
             /* virtual */ void InitOptions()
@@ -56,6 +56,7 @@ namespace fr {
                     return app.exec();
                 }
 
+                // Test app if requested
                 if(Args.count("test"))
                 {
                     std::cout << "Running the test." << std::endl;
@@ -63,6 +64,20 @@ namespace fr {
 
                     Test();
 
+                    return EXIT_SUCCESS;
+                }
+
+                // If no arguments were specified print help and exit
+                if(Argc < 1)
+                {
+                    std::cout << "Zabiju!" << std::endl;
+                    return EXIT_FAILURE;
+                }
+
+                // Print help and exit if needed
+                if (Args.size() < 1)
+                {
+                    std::cout << Opts << std::endl;
                     return EXIT_SUCCESS;
                 }
 

@@ -9,4 +9,4 @@ namespace fr {
 	BaseApp::~BaseApp() {
 	}
 
-}; // namespace fr
+} // namespace fr

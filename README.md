@@ -21,6 +21,8 @@ Library for face recognition using Waldboost algorithm
 * libxml2-dev
 * libargtable2-dev
 * pkg-config
+* libgtest-dev
+* libqt4-dev
 
 ## Build
 
@@ -28,7 +30,7 @@ Library for face recognition using Waldboost algorithm
 
 ```
 apt-get install autoconf automake build-essential module-assistant git-core cmake \
-  libopencv-dev libxml2-dev libargtable2-dev pkg-config libboost-all-dev libprotobuf-dev
+  libopencv-dev libxml2-dev libargtable2-dev pkg-config libboost-all-dev libprotobuf-dev libgtest-dev libqt4-dev
 ```
 
 * Clone repository

@@ -43,3 +43,6 @@ set_target_properties(Qt5::Core PROPERTIES MAP_IMPORTED_CONFIG_COVERAGE "RELEASE
 
 # Use the Widgets module from Qt 5.
 qt5_use_modules(demo Widgets)
+
+# Google test package
+find_package(GTest)

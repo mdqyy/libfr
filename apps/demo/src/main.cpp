@@ -15,6 +15,11 @@ namespace fr {
         class AppDemo : public BaseApp
 		{
         public:
+            static const unsigned short DEFAULT_WINDOW_WIDTH = 250;
+            static const unsigned short DEFAULT_WINDOW_HEIGHT = 150;
+            // static const char* DEFAULT_WINDOW_TITLE = "Demo";
+
+        public:
             /* virtual */ void InitOptions()
             {
                 // Init parent options
@@ -41,8 +46,8 @@ namespace fr {
 
                     QWidget window;
 
-                    window.resize(250, 150);
-                    window.setWindowTitle("Simple example");
+                    window.resize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+                    window.setWindowTitle("Demo");
                     window.show();
 
                     return app.exec();
@@ -57,5 +62,6 @@ namespace fr {
 
 int main(int argc, const char** argv)
 {
+    // See http://www.zetcode.com/gui/qt4/firstprograms/
     return fr::app::AppDemo().Run(argc, argv);
 }

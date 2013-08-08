@@ -30,7 +30,7 @@ target_link_libraries(demo ${Boost_LIBRARIES} libfr)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt5Core)
+find_package(Qt5Core REQUIRED)
 
 # Find the QtWidgets library
 find_package(Qt5Widgets)
@@ -49,3 +49,6 @@ qt5_use_modules(demo Widgets)
 # See http://www.rad.upenn.edu/sbia/software/basis/apidoc/latest/FindGTest_8cmake.html
 # See https://code.google.com/p/googletest/wiki/Primer
 find_package(GTest)
+
+include_directories(${GTEST_INCLUDE_DIRS})
+target_link_libraries(demo ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)

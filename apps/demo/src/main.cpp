@@ -10,6 +10,8 @@ namespace po = boost::program_options;
 #include <QApplication>
 #include <QWidget>
 
+#include <gtest/gtest.h>
+
 namespace fr {
 	namespace app {
         class AppDemo : public BaseApp
@@ -28,6 +30,7 @@ namespace fr {
                 // Specify program options
                 Opts.add_options()
                     ("gui,g", "show gui")
+                    ("test,t", "run test")
                     ;
             }
 
@@ -51,6 +54,16 @@ namespace fr {
                     window.show();
 
                     return app.exec();
+                }
+
+                if(Args.count("test"))
+                {
+                    std::cout << "Running the test." << std::endl;
+                    // Tests that the Foo::Bar() method does Abc.
+
+                    // ASSERT_TRUE(0 == 0);
+
+                    return EXIT_SUCCESS;
                 }
 
                 // Let base process it ...

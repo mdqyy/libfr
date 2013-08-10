@@ -24,6 +24,15 @@ Library for face recognition using Waldboost algorithm
 * libgtest-dev
 * libqt4-dev
 * google-mock
+* libreadline6-dev
+* libssl-dev
+* libyaml-dev
+* libsqlite3-dev
+* sqlite3
+* libgdbm-dev
+* libncurses5-dev
+* bison
+* libffi-dev
 
 ## Build
 
@@ -31,7 +40,9 @@ Library for face recognition using Waldboost algorithm
 
 ```
 apt-get install autoconf automake build-essential module-assistant git-core cmake \
-  libopencv-dev libxml2-dev libargtable2-dev pkg-config libboost-all-dev libprotobuf-dev libgtest-dev libqt4-dev google-mock
+  libopencv-dev libxml2-dev libargtable2-dev pkg-config libboost-all-dev libprotobuf-dev \
+  libgtest-dev libqt4-dev google-mock libreadline6-dev, libssl-dev, libyaml-dev, \
+  libsqlite3-dev, sqlite3, libgdbm-dev, libncurses5-dev, bison, libffi-dev
 ```
 
 * Clone repository
